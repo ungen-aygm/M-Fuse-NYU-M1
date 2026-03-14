@@ -99,9 +99,6 @@ source .venv/bin/activate
 # pip自体のアップデート（推奨）
 pip install --upgrade pip
 
-# 依存ライブラリのインストール
-pip install -r requirements.txt
-
 # プロジェクトを開発用（エディタブルモード）でインストール
 pip install -e .
 ```
