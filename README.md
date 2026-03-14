@@ -167,26 +167,26 @@ python3 train.py
 ```
 
 ## References
-[1] Chen, J., et al. (2021). "TransU-Net: Transformers Make Strong Encoders for Medical Image Segmentation." arXiv preprint arXiv:2102.04306.
-[2] Ranftl, R., et al. (2021). "Vision Transformers for Dense Prediction." Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), pp. 12179-12188.
-[3] Radford, A., et al. (2021). "Learning Transferable Visual Models from Natural Language Supervision." International Conference on Machine Learning (ICML), PMLR 139:8748-8763.
-[4] Silberman, N., et al. (2012). "Indoor Segmentation and Support Inference from RGBD Images." European Conference on Computer Vision (ECCV), Springer, Berlin, Heidelberg, pp. 746-760.
+[1] Chen, J., et al. (2021). "TransU-Net: Transformers Make Strong Encoders for Medical Image Segmentation." arXiv preprint arXiv:2102.04306.  
+[2] Ranftl, R., et al. (2021). "Vision Transformers for Dense Prediction." Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), pp. 12179-12188.  
+[3] Radford, A., et al. (2021). "Learning Transferable Visual Models from Natural Language Supervision." International Conference on Machine Learning (ICML), PMLR 139:8748-8763.  
+[4] Silberman, N., et al. (2012). "Indoor Segmentation and Support Inference from RGBD Images." European Conference on Computer Vision (ECCV), Springer, Berlin, Heidelberg, pp. 746-760.  
 [5] Chen, L. C., et al. (2018). "Encoder-Decoder with Atrous Separable Convolution for Semantic Segmentation." Proceedings of the European Conference on Computer Vision (ECCV), pp. 801-818.
-[6] Lin, T. Y., et al. (2017). "Focal Loss for Dense Object Detection." Proceedings of the IEEE International Conference on Computer Vision (ICCV), pp. 2980-2988.
-[7] Hazirbas, C., et al. (2016). "FuseNet: Incorporating Depth into Semantic Segmentation via Fusion-based CNN Architecture." Asian Conference on Computer Vision (ACCV), Springer, Cham, pp. 213-228.
+[6] Lin, T. Y., et al. (2017). "Focal Loss for Dense Object Detection." Proceedings of the IEEE International Conference on Computer Vision (ICCV), pp. 2980-2988.  
+[7] Hazirbas, C., et al. (2016). "FuseNet: Incorporating Depth into Semantic Segmentation via Fusion-based CNN Architecture." Asian Conference on Computer Vision (ACCV), Springer, Cham, pp. 213-228.  
 [8] PyTorch Documentation. "Introducing Accelerated PyTorch Training on Mac." PyTorch Blog (2022). Available at: https://pytorch.org/blog/introducing-accelerated-pytorch-training-on-mac/ (Accessed: 2026-03-10).
-[9] Ronneberger, O., Fischer, P., & Brox, T. (2015). U-Net: Convolutional Networks for Biomedical Image Segmentation.
-Proceedings of the International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2015. arXiv preprint arXiv:1505.04597.
-[10] Gupta, S., Girshick, R., Arbelaez, P., & Malik, J. (2014). Learning Rich Features from RGB-D Images for Object Detection and Segmentation. Proceedings of the European Conference on Computer Vision (ECCV), 2014. arXiv preprint arXiv:1407.5736.
-
+[9] Ronneberger, O., Fischer, P., & Brox, T. (2015). U-Net: Convolutional Networks for Biomedical Image Segmentation.  
+Proceedings of the International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2015. arXiv preprint arXiv:1505.04597.  
+[10] Gupta, S., Girshick, R., Arbelaez, P., & Malik, J. (2014). Learning Rich Features from RGB-D Images for Object Detection and Segmentation. Proceedings of the European Conference on Computer Vision (ECCV), 2014. arXiv preprint arXiv:1407.5736.  
+  
 Reproducibility: Code and training scripts will be released on GitHub to ensure reproducibility.
 
 --- 
 
 ### 免責事項
-> 研究・教育用。シンプルさと高速な動作を実現するため、入力チェックは最低限の実装となっています。
-> Designed for research and education. Minimal input validation is performed for simplicity and performance.
-> ※ 本プロジェクトは個人開発ポートフォリオとして実装したものである。
-> ※ 本プロジェクトでは講座の最終課題で使用されたデータセットを実験用に流用しているが、コミュニティ規約によりデータセット自体は公開対象としない。そのため完全な再現は難しい可能性があるが、実験設定・モデル構成・学習条件については本レポート内で可能な限り詳細に記述した。
-> ※ 本プロジェクトでは、13クラスのインデックスを特定環境の独自の順序を仮定し（0: bed, ..., 11: wall 等）定義している。標準的な NYUv2 13-class順序と異なる場合があるため注意が必要である。
-> NYUv2 ラベル（1〜894）を評価に使用する際は、学習時のインデックスと同期させる必要がある。
+> * 研究・教育用。シンプルさと高速な動作を実現するため、入力チェックは最低限の実装となっています。
+> * Designed for research and education. Minimal input validation is performed for simplicity and performance.
+> * ※ 本プロジェクトは個人開発ポートフォリオとして実装したものである。
+> * ※ 本プロジェクトでは講座の最終課題で使用されたデータセットを実験用に流用しているが、コミュニティ規約によりデータセット自体は公開対象としない。そのため完全な再現は難しい可能性があるが、実験設定・モデル構成・学習条件については本レポート内で可能な限り詳細に記述した。
+> * ※ 本プロジェクトでは、13クラスのインデックスを特定環境の独自の順序を仮定し（0: bed, ..., 11: wall 等）定義している。標準的な NYUv2 13-class順序と異なる場合があるため注意が必要である。
+> * NYUv2 ラベル（1〜894）を評価に使用する際は、学習時のインデックスと同期させる必要がある。
