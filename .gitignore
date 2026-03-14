@@ -1,0 +1,44 @@
+# --- datasets ---
+/datasets/*
+!/datasets/.gitkeep
+**/*.jpg
+**/*.png
+**/*.gif
+**/*.mat
+**/*.npy
+**/*.npz
+
+# --- Model Weights (Ensemble models get heavy!) ---
+# アンサンブルする各モデルの重みや、マージ後の重みを無視
+**/*.pth
+**/*.pt
+**/*.ckpt
+**/*.safetensors
+**/*.onnx
+**/*.bin
+
+# --- Outputs & Logs ---
+# 学習ログ（TensorBoard）
+/runs/*
+!/runs/.gitkeep
+
+# --- Python & System ---
+**/__pycache__/
+*.pyc
+.DS_Store
+.venv/
+.env
+# --- 説明用画像 ---
+!/docs/*.jpg
+!/docs/*.png
+
+# --- Config ---
+# 設定ファイル
+# **/*.toml
+# --- Shell ---
+*.sh
+
+# 論文
+/paper/*
+# M1/Apple
+train.sh
