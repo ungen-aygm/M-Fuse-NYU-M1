@@ -132,7 +132,7 @@ deactivate
   
 ### 前処理の実行
 ```
-python3 preprocess.py
+python3 test/preprocess.py
 ```
 
 ### データセット配置イメージ
