@@ -76,7 +76,7 @@ https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html
 トレーニング曲線、クラスごとのIoU分析、実験ログを含む完全な技術レポートは、以下からご覧いただけます。  
 The complete technical report, including training curves, IoU analysis by class, and experiment logs, is available here.(Japanese Only)
 
-[NYUv2 Late Fusion Technical Report](docs/pdf/NYUv2SemanticSegmentationCLIP-ViT+LateFusionImplementationonAppleM1.pdf)
+[NYUv2 Late Fusion Technical Report](docs/pdf/NYUv2_SemanticSegmentation_CLIP-ViT_LateFusion_Implementation_on_Apple_M1.pdf)
 
 ## 開発環境の構築
 
