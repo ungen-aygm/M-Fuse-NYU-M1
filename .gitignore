@@ -15,6 +15,7 @@
 **/*.ckpt
 **/*.safetensors
 **/*.onnx
+**/*.data
 **/*.bin
 
 # --- Outputs & Logs ---
