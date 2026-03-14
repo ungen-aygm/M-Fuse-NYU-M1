@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 # $ pip -e .
 
 [project]
-name = "late_fution_128"
+name = "late_fusion_128"
 version = "0.1.0"
 dynamic = ["dependencies"]
 
