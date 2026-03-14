@@ -54,7 +54,7 @@ https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html
 
 > ![Late Fusion Model](docs/LateFusionModelArchitecture.png)
 > Figure 1: Late Fusion Model アーキテクチャ. 
-> 本モデルは幾何ストリーム（入力1： $336 \times 336 \times 1: \text{Depth}$ ）と意味的ストリーム（入力2:　$336 \times 336 \times 3: RGB$　）を統合する構成となっている。
+> 本モデルは幾何ストリーム（入力1： $336 \times 336 \times 1: \text{Depth}$ ）と意味的ストリーム（入力2: $336 \times 336 \times 3: \text{RGB}$　）を統合する構成となっている。
 > 特徴量の抽出には、それぞれResNet-18ベースのエンコーダ と 学習済みViT（Vision Transformer） を使用している。
 > 両ストリームから抽出された特徴量（ $21 \times 21$　）は、結合レイヤー（512チャネル）で統合される前に、同一の解像度へアップサンプリングされる。最終的な出力層では、128チャネルの高次元特徴表現を用いることで、全13クラスに対するセマンティックセグメンテーションを提供する。
 > 本図は入力解像度336×336時のアーキテクチャを示す。最終的な訓練では448×448を採用した。
