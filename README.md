@@ -53,11 +53,11 @@ https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html
 ## Model Architecture
 
 > ![Late Fusion Model](docs/LateFusionModelArchitecture.png)
-> Figure 1: Late Fusion Model アーキテクチャ. 
-> 本モデルは幾何ストリーム（入力1： $336 \times 336 \times 1: \text{Depth}$ ）と意味的ストリーム（入力2: $336 \times 336 \times 3: \text{RGB}$　）を統合する構成となっている。
+> Figure 1: Late Fusion Model アーキテクチャ.  
+> 本モデルは幾何ストリーム（入力1： $336 \times 336 \times 1: \text{Depth}$ ）と意味的ストリーム（入力2: $336 \times 336 \times 3: \text{RGB}$　）を統合する構成となっている。  
 > 特徴量の抽出には、それぞれResNet-18ベースのエンコーダ と 学習済みViT（Vision Transformer） を使用している。
-> 両ストリームから抽出された特徴量（ $21 \times 21$　）は、結合レイヤー（512チャネル）で統合される前に、同一の解像度へアップサンプリングされる。最終的な出力層では、128チャネルの高次元特徴表現を用いることで、全13クラスに対するセマンティックセグメンテーションを提供する。
-> 本図は入力解像度336×336時のアーキテクチャを示す。最終的な訓練では448×448を採用した。
+> 両ストリームから抽出された特徴量（ $21 \times 21$　）は、結合レイヤー（512チャネル）で統合される前に、同一の解像度へアップサンプリングされる。最終的な出力層では、128チャネルの高次元特徴表現を用いることで、全13クラスに対するセマンティックセグメンテーションを提供する。  
+> 本図は入力解像度336×336時のアーキテクチャを示す。最終的な訓練では448×448を採用した。  
 
 ## Results
 ### Quantitative Results
@@ -73,14 +73,14 @@ https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html
 
 ### Project Report (PDF)
 
-トレーニング曲線、クラスごとのIoU分析、実験ログを含む完全な技術レポートは、以下からご覧いただけます。
+トレーニング曲線、クラスごとのIoU分析、実験ログを含む完全な技術レポートは、以下からご覧いただけます。  
 The complete technical report, including training curves, IoU analysis by class, and experiment logs, is available here.(Japanese Only)
 
 [NYUv2 Late Fusion Technical Report](docs/pdf/NYUv2SemanticSegmentationCLIP-ViT+LateFusionImplementationonAppleM1.pdf)
 
 ## 開発環境の構築
 
-本プロジェクトは `src` ディレクトリ構造を採用しています。
+本プロジェクトは `src` ディレクトリ構造を採用しています。  
 開発やテストを行う際は、以下の手順で Python の仮想環境（`.venv`）を構築し、パッケージをインストールしてください。
 
 ### 1. 仮想環境の作成と有効化
@@ -122,17 +122,17 @@ deactivate
 - **Base Learning Rate:** 1e-4
 
 ### Learning Rate Strategy
-> 異なるモジュールに対して異なる学習率を設定した。
-> CLIP (ViT) エンコーダは事前学習済みモデルであるため、過度な重み更新を防ぐ目的で小さい学習率を設定した。
-> 一方、Depth U-Net はスクラッチ学習に近いため、より大きな学習率を使用している。
+> 異なるモジュールに対して異なる学習率を設定した。  
+> CLIP (ViT) エンコーダは事前学習済みモデルであるため、過度な重み更新を防ぐ目的で小さい学習率を設定した。  
+> 一方、Depth U-Net はスクラッチ学習に近いため、より大きな学習率を使用している。  
 - **CLIP Encoder:** Base LR × 1e-2  
 - **U-Net Encoder:** Base LR × 3.0  
 - **Late Fusion / Decoder:** Base LR × 1.0
 
 ## 実行
 
-	データセットが所定のディレクトリ(datasets/nyuv2/)以下に正しく配置されていることを確認し、以下のコマンドで前処理を実行してから学習を開始します。
-
+	データセットが所定のディレクトリ(datasets/nyuv2/)以下に正しく配置されていることを確認し、以下のコマンドで前処理を実行してから学習を開始します。  
+  
 ### 前処理の実行
 ```
 python3 preprocess.py
