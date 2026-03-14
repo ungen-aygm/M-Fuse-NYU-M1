@@ -1,4 +1,3 @@
-import mlx.core as mx
 from tqdm import tqdm
 import torch
 import numpy as np
@@ -29,7 +28,7 @@ print(f"TensorBoard Log DIR => {log.dir}")
 
 # 1e-4(AdamW)
 lr = config.LR["base"]
-epoches = config.EPOCHS
+epochs = config.EPOCHS
 batch_size = config.BATCH_SIZE
 # データ拡張
 is_augmentation = True
@@ -75,7 +74,7 @@ log(
 		"state_dict":[]
 	}, 
 	training={
-		"epoch":epoches, 
+		"epoch":epochs, 
 		"batch_size":batch_size, 
 		"optimizer":optimizer.__class__.__name__, 
 		"learning_rate":lr, 
@@ -100,7 +99,7 @@ def main(train_data, valid_data, optimizer, criterion, writer, log):
 	config = Config()
 	device = config.device
 
-	for epoch in range(0, epoches):
+	for epoch in range(0, epochs):
 		epoch_start_time = time.time()
 		# 訓練
 		t0 = time.time()
@@ -116,7 +115,7 @@ def main(train_data, valid_data, optimizer, criterion, writer, log):
 
 		save_model(model, epoch, miou, log.dir)
 		# epoch最後にモデルを保存する。
-		if epoch == (epoches - 1):
+		if epoch == (epochs - 1):
 			# save_model(model, epoch, miou, log.dir)
 			save_path = f"{log.dir}/checkpoints/latefusion_epochs_{epoch}_miou_{miou:.2f}.pth"
 			torch.save(model.state_dict(), save_path)
