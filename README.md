@@ -1,4 +1,4 @@
-# RGB-D Semantic Segmentation with CLIP-ViT and Depth U-Net Late Fusion
+# Accessible RGB-D Semantic Segmentation: CLIP-ViT Late Fusion Implementation on Consumer-Grade Apple M1
 **Multimodal RGB-D Semantic Segmentation using CLIP-ViT and Depth U-Net with Late Fusion**
 
 > Language: Japanese Only
@@ -46,9 +46,13 @@
 
 ## Dataset
 
-NYU Depth Dataset V2 (NYUv2)
+[NYU Depth Dataset V2 (NYUv2)]
 
 https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html
+
+[NYUv2 Meta Data]
+
+https://github.com/ankurhanda/nyuv2-meta-data
 
 ## Model Architecture
 
@@ -126,13 +130,17 @@ deactivate
 - **U-Net Encoder:** Base LR × 3.0  
 - **Late Fusion / Decoder:** Base LR × 1.0
 
-## 実行
+## Quick Start
 
-	データセットが所定のディレクトリ(datasets/nyuv2/)以下に正しく配置されていることを確認し、以下のコマンドで前処理を実行してから学習を開始します。  
+	データセットが所定のディレクトリ(datasets/nyuv2/)以下に正しく配置されていることを確認してください。
+    以下のコマンドでは、前処理を実行してから学習を開始します。  
   
 ### 前処理の実行
 ```
-python3 test/preprocess.py
+# nyuv2/label data処理を実行
+# 初回実行時に約2.8GBのデータをダウンロードします。サーバー負荷を考慮し複数回の実行はお控えください。
+
+$ sh data_setup.sh
 ```
 
 ### データセット配置イメージ
@@ -162,6 +170,11 @@ datasets/
 ```
 python3 train.py
 ```
+
+### Reproducibility Guide
+1. `sh data_setup.sh` で公式NYUv2データを取得・変換
+2. `python3 train.py` で初期学習開始
+3. 学習済みモデルの反映は `train.py` 内の `is_load_model=True` で再利用可能
 
 ## References
 [1] Chen, J., et al. (2021). "TransU-Net: Transformers Make Strong Encoders for Medical Image Segmentation." arXiv preprint arXiv:2102.04306.  

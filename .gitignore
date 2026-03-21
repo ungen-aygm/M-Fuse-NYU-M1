@@ -37,7 +37,8 @@
 # 設定ファイル
 # **/*.toml
 # --- Shell ---
-*.sh
+train.sh
+diff.sh
 
 # 論文
 /paper/*

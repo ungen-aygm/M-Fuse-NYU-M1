@@ -13,6 +13,7 @@ from config import Config
 from datetime import datetime
 from utils.miou import mIoU
 import numpy as np
+import os
 
 class Visualizer:
 	DEFAULT_SIZE = (224, 224)
@@ -30,7 +31,8 @@ class Visualizer:
 		norm = mcolors.BoundaryNorm(np.arange(vmin, vmax + 2), cmap.N)
 		# EXAM) plt.imshow(img.squeeze(), cmap=cmap, norm=norm)
 		return cmap, norm
-	
+
+	# 画像検証
 	def confirm(self, dataset):
 		config = Config()
 		device = config.device
@@ -64,7 +66,43 @@ class Visualizer:
 				plt.axis("off")
 			
 		plt.show()
+	# 画像から一枚取り出す
+	def confirm_raw_data(self, setup):
+		# 乱数
+		rng = np.random.default_rng()
+		image_path = os.path.join(setup.path["train"]["img"], "*")
+		idx = rng.integers(0, len(glob(image_path)))
+		image = sorted(glob(image_path))[idx]
+		image = Image.open(image)
 
+		depth_path = os.path.join(setup.path["train"]["depth"], "*")
+		depth = sorted(glob(depth_path))[idx]
+		depth = Image.open(depth)
+
+		label_path = os.path.join(setup.path["train"]["label"], "*")
+		label = sorted(glob(label_path))[idx]
+		label = Image.open(label)
+
+		plt.figure(figsize=(8, 2))
+		plt.subplot(1, 3, 1)
+		plt.title("RGB")
+		plt.imshow(image)
+		plt.axis("off")
+
+		plt.subplot(1, 3, 2)
+		plt.title("Depth")
+		plt.imshow(depth, cmap="YlOrRd", vmin=0.2)
+		plt.axis("off")
+
+		plt.subplot(1, 3, 3)
+		plt.title(f"Label")
+		plt.imshow(label, cmap="tab20", vmin=1, vmax=13)
+		plt.text(0, 540, np.unique(label), fontsize=7)
+		plt.axis("off")
+
+		plt.show()
+		
+	# 開発モデルの推論画像を出力する
 	def export(self, model, dataset, cmax=1, save_dir=""):
 		model.eval()
 		config = Config()
@@ -120,7 +158,8 @@ class Visualizer:
 		plt.imshow(predict[0], cmap=cmap, norm=norm)
 		plt.axis("off")
 
-		filename = f"{save_dir}/plot_{idx}_{self.date}.png" if save_dir != "" else f"{path}/plot_{idx}_{self.date}.png"
+		_fname = f"plot_{idx}_{self.date}.png"
+		filename = os.path.join(path, save_dir, _fname) if save_dir != "" else os.path.join(path, _fname)
 		
 		if mode == "save":
 			plt.savefig(filename, bbox_inches='tight', pad_inches=0.1)
@@ -178,7 +217,7 @@ class Visualizer:
 			data = data.squeeze(0)
 		
 		return data
-
+	
 	# Show Plot( 3 photo * 4 columns and rows )
 	def plot_triplet_grid(self, images:list, labels=[]):
 		plt.figure(figsize=self.figsize)
