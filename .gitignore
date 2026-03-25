@@ -25,6 +25,7 @@
 
 # --- Python & System ---
 **/__pycache__/
+**/*.egg-info/
 *.pyc
 .DS_Store
 .venv/
