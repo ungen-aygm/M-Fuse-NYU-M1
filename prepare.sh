@@ -25,6 +25,6 @@ sleep 0.1
 # あれば、データ削除
 rm -rf "$DATASETS"/nyuv2/{train,test}/{image,depth,label}
 echo "--- finished, Prepare Dataset. ---"
-echo "--- check train.py: is_load_model=False"
+echo "--- check src/config.py: is_load_model=False"
 echo "	Run Train:$ python3 train.py"
 sleep 0.1

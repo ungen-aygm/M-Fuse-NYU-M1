@@ -61,7 +61,18 @@ https://github.com/ankurhanda/nyuv2-meta-data
 > 本モデルは幾何ストリーム（入力1： $336 \times 336 \times 1: \text{Depth}$ ）と意味的ストリーム（入力2: $336 \times 336 \times 3: \text{RGB}$　）を統合する構成となっている。  
 > 特徴量の抽出には、それぞれResNet-18ベースのエンコーダ と 学習済みViT（Vision Transformer） を使用している。
 > 両ストリームから抽出された特徴量（ $21 \times 21$　）は、結合レイヤー（512チャネル）で統合される前に、同一の解像度へアップサンプリングされる。最終的な出力層では、128チャネルの高次元特徴表現を用いることで、全13クラスに対するセマンティックセグメンテーションを提供する。  
-> 本図は入力解像度336×336時のアーキテクチャを示す。最終的な訓練では448×448を採用した。  
+> 本図は入力解像度336×336時のアーキテクチャを示す。最終的な訓練では448×448を採用した。
+
+## Performance (Inference Speed)
+
+Apple M1 GPU (MPS) 環境における推論速度の計測結果です。
+
+| Input Resolution | Avg Inference Time | Throughput |
+|:---|:---|:---|
+| 224 × 224 (Estimated) | 63.55 ms | 15.74 FPS |
+| 448 × 448 (Training) | 246.09 ms | 4.06 FPS |
+
+> Note: `benchmark.py` を使用して、10回のウォームアップ後に平均測定。`torch.mps.synchronize()` により演算時間を算出しています。
 
 ## Results
 ### Quantitative Results
@@ -139,9 +150,11 @@ deactivate
 ```
 # nyuv2/label data処理を実行
 # 初回実行時に約2.8GBのデータをダウンロードします。サーバー負荷を考慮し複数回の実行はお控えください。
+# 以下のShellスクリプトで自動的に訓練・評価データをダウンロード・ラベル付与しています。
 
 $ sh prepare.sh
 ```
+補足：データは連番です。コンペティションなどデータリークを厳しく管理する場合は別のクレンジング方法を使用してください。
 
 ### データセット配置イメージ
 ```
@@ -166,7 +179,7 @@ datasets/
     │   └── mask/
 ```
 
-### 学習開始（初期学習の場合、train.py内のis_load_modelをFalseにすること）
+### 実行：学習（初期学習の場合、train.py内のis_load_modelをFalseにします。）
 ```
 python3 train.py
 ```
@@ -174,7 +187,20 @@ python3 train.py
 ### Reproducibility Guide
 1. `sh prepare.sh` で公式NYUv2データを取得・変換
 2. `python3 train.py` で初期学習開始
-3. 学習済みモデルの反映は `train.py` 内の `is_load_model=True` で再利用可能
+3. 学習済みモデルの反映は `config.py` 内の `is_load_model=True` で再利用可能
+
+### 実行：評価・ベンチマーク
+学習済みモデルの再現性とパフォーマンスを検証するためのスクリプトを用意しています。
+
+- 精度検証 (mIoU/クラス別IoU):
+```
+python3 test/pipeline.py
+```
+
+- 推論速度計測 (FPS):
+```
+python3 test/benchmark.py
+```
 
 ## References
 [1] Chen, J., et al. (2021). "TransU-Net: Transformers Make Strong Encoders for Medical Image Segmentation." arXiv preprint arXiv:2102.04306.  

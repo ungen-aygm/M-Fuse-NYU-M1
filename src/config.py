@@ -5,30 +5,30 @@ class Config:
 	# ハイパーパラメータ
 	##################################################
 	# 基本設定
-	CONFIG_PATH="src/config.yaml"
+	CONFIG_PATH="utils.config"
 	# Tensor Board
 	LOG_PATH="runs/"
 
 	# MODEL (LATEST)
+	IS_LOAD_MODEL = True
 	LATEST_MODEL="runs/fase6/LateFution_128ch_20260313-181004/checkpoints/latefusion_epochs_4_miou_0.79.pth"
 	
 	# 入力解像度
-	TARGET_SIZE=(448, 448) # (224, 224) or (336, 336)
+	TARGET_SIZE=(224, 224) # (224, 224) or (336, 336) or (448, 448)
 
 	# BATCH SIZE
-	BATCH_SIZE = 8 # (448, 448) *ViT Freeze / 8 or 16
+	BATCH_SIZE = 16 # (448, 448) *ViT Freeze / 8 or 16
 
 	# EPOCH
 	EPOCHS = 5
 
 	# LEARNING RATES (差分学習率設定)
 	LR = {
-		"base":5e-5, # 1e-4
-		"ViT": 1e-1, # lr * 1e-2
-		"UNet": 1.0, # lr * 3.0
+		"base":1e-4, # 1e-4
+		"ViT": 1e-2, # lr * 1e-2
+		"UNet": 3.0, # lr * 3.0
 		"LateFusion": 1.0, # lr * 1.0
 	}
-
 	# Learning Schedule(学習スケジュール)
 	# mIoUを最大化したい=>max
 	LR_MODE="max"
@@ -51,6 +51,7 @@ class Config:
 	IGNORE_INDEX=255
 
 	# Augment
+	IS_AUGUMENT = True
 	CROP=True
 	DEGREES=20
 	HFLIP=0.5
@@ -144,10 +145,24 @@ class Config:
 		TARGET_SIZE=(224, 224),
 		BATCH_SIZE=16,
 		EPOCHS=10,
+		IS_LOAD_MODEL=False,
+		MODEL="runs/_/checkpoints/_.pth",
+		IS_AUGUMENT=False,
+		LR=[1e-4, 1e-2, 3.0, 1.0]
 	):
 		self.TARGET_SIZE = TARGET_SIZE
 		self.BATCH_SIZE = BATCH_SIZE
 		self.EPOCHS = EPOCHS
+		self.LATEST_MODEL = MODEL
+		self.IS_LOAD_MODEL = IS_LOAD_MODEL
+		self.IS_AUGUMENT = IS_AUGUMENT
+		if len(LR) == 4 and isinstance(LR, list) is True:
+			self.LR["base"]=LR[0]
+			self.LR["ViT"]=LR[1]
+			self.LR["UNet"]=LR[2]
+			self.LR["LateFusion"]=LR[3]
+		else:
+			print("LR is 4 lists, (base, ViT, UNet, LateFusion)の順,Config.pyを確認。")
 
 	def __repr__(self):
-		return f"Target: {self.TARGET_SIZE}, Device: {self.device}"
+		return f"Configuration{self.TARGET_SIZE}, Device: {self.device}"

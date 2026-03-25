@@ -137,7 +137,7 @@ class Setup_NYUV2(Preprocess):
 	def check_mat_file(self):
 		file = os.path.isfile(self.MAT_FILE)
 		if file is False:
-			print(f"{self.MAT_FILE}が見つかりません。data_setup.shを実行してください。")
+			print(f"{self.MAT_FILE}が見つかりません。prepare.shを実行してください。")
 			return False
 		return True
 

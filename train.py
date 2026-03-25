@@ -31,9 +31,9 @@ lr = config.LR["base"]
 epochs = config.EPOCHS
 batch_size = config.BATCH_SIZE
 # データ拡張
-is_augmentation = True
+is_augmentation = config.IS_AUGUMENT
 # FTする時True, 初期学習時はFalse
-is_load_model = True
+is_load_model = config.IS_LOAD_MODEL
 # FT対象：モデル指定
 model_path = config.LATEST_MODEL
 ################################################################################
