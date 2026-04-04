@@ -89,13 +89,8 @@ Apple M1 GPU (MPS) 環境における推論速度の計測結果です。
 
 ### Project Report (PDF)
 
-トレーニング曲線、クラスごとのIoU分析、実験ログを含む完全な技術レポートは、以下からご覧いただけます。  
-The complete technical report, including training curves, IoU analysis by class, and experiment logs, is available here.(Japanese Only)
-
-[NYUv2 Late Fusion Technical Report](docs/pdf/NYUv2_SemanticSegmentation_CLIP-ViT_LateFusion_Implementation_on_Apple_M1.pdf)
-
-### Project Report
 トレーニング曲線、クラスごとのIoU分析、実験ログを含む詳細な技術レポートは、Docswellにて公開しています。  
+The detailed technical report, including training curves, per-class IoU analysis, and experiment logs, is available on Docswell.
 
 ## 開発環境の構築
 
