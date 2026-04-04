@@ -132,27 +132,59 @@ deactivate
 - **Optimizer:** AdamW
 - **Base Learning Rate:** 1e-4
 
-### Learning Rate Strategy
-> 異なるモジュールに対して異なる学習率を設定した。  
+### Learning Rate Strategy (差分学習率)
+<!-- > 異なるモジュールに対して異なる学習率を設定した。  
 > CLIP (ViT) エンコーダは事前学習済みモデルであるため、過度な重み更新を防ぐ目的で小さい学習率を設定した。  
 > 一方、Depth U-Net はスクラッチ学習に近いため、より大きな学習率を使用している。  
 - **CLIP Encoder:** Base LR × 1e-2  
 - **U-Net Encoder:** Base LR × 3.0  
-- **Late Fusion / Decoder:** Base LR × 1.0
+- **Late Fusion / Decoder:** Base LR × 1.0 -->
+> モジュールごとの特性に合わせ、最適化の感度を調整しています。
+| Module | LR Multiplier | Reason |
+|:---|:---|:---|
+| CLIP Encoder | Base LR × 0.01 | 事前学習済みの重みを壊さないよう微調整 |
+| U-Net Encoder | Base LR × 3.0 | 幾何学的特徴の抽出を加速させるため高めに設定 |
+| Late Fusion / Decoder | Base LR × 1.0 | 統合層の標準的な学習 |
 
-## Quick Start
+## Quick Start & Reproducibility
 
 	データセットが所定のディレクトリ(datasets/nyuv2/)以下に正しく配置されていることを確認してください。
     以下のコマンドでは、前処理を実行してから学習を開始します。  
   
 ### 前処理の実行
-```
+データセットの準備から学習まで、以下の手順で実行可能です。
+
+### 1. 準備
+約2.8GBのデータをダウンロードし、訓練用フォーマット（13クラス）に変換します。
+※ 初回実行時に約2.8GBのデータをダウンロードします。サーバー負荷を考慮し複数回の実行はお控えください。
+
+```bash
 # nyuv2/label data処理を実行
-# 初回実行時に約2.8GBのデータをダウンロードします。サーバー負荷を考慮し複数回の実行はお控えください。
 # 以下のShellスクリプトで自動的に訓練・評価データをダウンロード・ラベル付与しています。
 
-$ sh prepare.sh
+# 1. データセットの準備 (約2.8GBのダウンロードと13ラベル変換)
+chmod +x prepare.sh
+sh prepare.sh
 ```
+
+### 2. 実行：学習（初期学習の場合、train.py内のis_load_modelをFalseにします。）
+```bash
+python3 train.py
+```
+
+### 3. 実行：評価・ベンチマーク(Reproducibility Guide)
+学習済みモデルの再現性とパフォーマンスを検証するためのスクリプトを用意しています。
+
+- 精度検証 (mIoU/クラス別IoU):
+```bash
+python3 test/pipeline.py
+```
+
+- 推論速度計測 (FPS):
+```bash
+python3 test/benchmark.py
+```
+--- 
 補足：データは連番です。コンペティションなどデータリークを厳しく管理する場合は別のクレンジング方法を使用してください。
 
 ### データセット配置イメージ
@@ -168,38 +200,16 @@ datasets/
 
 ### 前処理実行後
 ```
-datasets/
-└── nyuv2/
-    ├── train/
-    │   ├── image/
-    │   ├── depth/
-    │   ├── label/
-    │   ├── numpy/
-    │   └── mask/
+datasets/nyuv2/
+├── train/
+│   ├── image/ , depth/ , label/  (Raw Data)
+│   ├── * numpy/ *                (Converted .npy files for training)
+│   └── * mask/  *                (Mapped 13-class labels)
+└── test/
+    └── ... (Same structure as train)
 ```
 
-### 実行：学習（初期学習の場合、train.py内のis_load_modelをFalseにします。）
-```
-python3 train.py
-```
 
-### Reproducibility Guide
-1. `sh prepare.sh` で公式NYUv2データを取得・変換
-2. `python3 train.py` で初期学習開始
-3. 学習済みモデルの反映は `config.py` 内の `is_load_model=True` で再利用可能
-
-### 実行：評価・ベンチマーク
-学習済みモデルの再現性とパフォーマンスを検証するためのスクリプトを用意しています。
-
-- 精度検証 (mIoU/クラス別IoU):
-```
-python3 test/pipeline.py
-```
-
-- 推論速度計測 (FPS):
-```
-python3 test/benchmark.py
-```
 
 ## References
 [1] Chen, J., et al. (2021). "TransU-Net: Transformers Make Strong Encoders for Medical Image Segmentation." arXiv preprint arXiv:2102.04306.  
