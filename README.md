@@ -167,7 +167,7 @@ chmod +x prepare.sh
 sh prepare.sh
 ```
 
-### 2. 実行：学習（初期学習の場合、train.py内のis_load_modelをFalseにします。）
+### 2. 実行：学習（初期学習の場合、src/config.py内のIS_LOAD_MODELをFalseにします。）
 ```bash
 python3 train.py
 ```
