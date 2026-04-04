@@ -75,6 +75,7 @@ Apple M1 GPU (MPS) 環境における推論速度の計測結果です。
 > Note: `benchmark.py` を使用して、10回のウォームアップ後に平均測定。`torch.mps.synchronize()` により演算時間を算出しています。
 
 ## Results
+
 ### Quantitative Results
 
 | Model | mIoU | Notes |
@@ -92,6 +93,9 @@ Apple M1 GPU (MPS) 環境における推論速度の計測結果です。
 The complete technical report, including training curves, IoU analysis by class, and experiment logs, is available here.(Japanese Only)
 
 [NYUv2 Late Fusion Technical Report](docs/pdf/NYUv2_SemanticSegmentation_CLIP-ViT_LateFusion_Implementation_on_Apple_M1.pdf)
+
+## レポート
+https://www.docswell.com/s/8586553/K9NVV7-2026-04-04-173820/1
 
 ## 開発環境の構築
 
