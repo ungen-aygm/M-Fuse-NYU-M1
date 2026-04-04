@@ -94,8 +94,8 @@ The complete technical report, including training curves, IoU analysis by class,
 
 [NYUv2 Late Fusion Technical Report](docs/pdf/NYUv2_SemanticSegmentation_CLIP-ViT_LateFusion_Implementation_on_Apple_M1.pdf)
 
-## レポート
-https://www.docswell.com/s/8586553/K9NVV7-2026-04-04-173820/1
+### Project Report
+トレーニング曲線、クラスごとのIoU分析、実験ログを含む詳細な技術レポートは、Docswellにて公開しています。  
 
 ## 開発環境の構築
 
