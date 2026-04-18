@@ -6,17 +6,15 @@
 > 
 > データセットに関するお知らせ
 >
-> 本プロジェクトでは、深層学修コミュニティの最終課題で使用されたデータセットを利用しています。
-> コミュニティのルールにより、このリポジトリでは当該データセットを再配布しておりません。
->
-> 同様の実験を再現する際には、NYUv2などの公開されているRGB-Dデータセットをご利用ください。
+> 本プロジェクトでは個人ポートフォリオ作成のためプライベートな学習プログラムで提供されたデータセットを利用していました。
+> 規約に基づき、当該データセットは本リポジトリに含まれておりません。
+> ** 再現性について: **
+> 実験の再現方法（公開データセット NYUv2 の使用手順）については、[Quick Start & Reproducibility](#reproduce) を参照してください。
 >
 > Dataset Notice
 >
-> This project uses a dataset from a course final assignment.
-> Due to community rules, the dataset is not redistributed in this repository.
->
-> Please use publicly available RGB-D datasets such as NYUv2 to reproduce similar experiments.
+> This project was developed for a personal portfolio using a dataset provided through a private study program.
+> To reproduce the experiments, please use publicly available RGB-D datasets such as NYUv2.
 
 ## Project Overview
 
@@ -78,8 +76,8 @@ Apple M1 GPU (MPS) 環境における推論速度の計測結果です。
 
 ### Quantitative Results
 
-| Model | mIoU | Notes |
-|------|------|------|
+| Model | mIoU | Notes | 
+|------|------|------| 
 | DeepLabV3+ | 0.532 | Baseline |
 | Proposed Late Fusion | **0.6144** | CLIP-ViT + Depth U-Net |
 
@@ -133,20 +131,16 @@ deactivate
 - **Base Learning Rate:** 1e-4
 
 ### Learning Rate Strategy (差分学習率)
-<!-- > 異なるモジュールに対して異なる学習率を設定した。  
-> CLIP (ViT) エンコーダは事前学習済みモデルであるため、過度な重み更新を防ぐ目的で小さい学習率を設定した。  
-> 一方、Depth U-Net はスクラッチ学習に近いため、より大きな学習率を使用している。  
-- **CLIP Encoder:** Base LR × 1e-2  
-- **U-Net Encoder:** Base LR × 3.0  
-- **Late Fusion / Decoder:** Base LR × 1.0 -->
+
 > モジュールごとの特性に合わせ、最適化の感度を調整しています。
+
 | Module | LR Multiplier | Reason |
 |:---|:---|:---|
 | CLIP Encoder | Base LR × 0.01 | 事前学習済みの重みを壊さないよう微調整 |
 | U-Net Encoder | Base LR × 3.0 | 幾何学的特徴の抽出を加速させるため高めに設定 |
 | Late Fusion / Decoder | Base LR × 1.0 | 統合層の標準的な学習 |
 
-## Quick Start & Reproducibility
+## <a id="reproduce"></a>Quick Start & Reproducibility
 
 	データセットが所定のディレクトリ(datasets/nyuv2/)以下に正しく配置されていることを確認してください。
     以下のコマンドでは、前処理を実行してから学習を開始します。  
@@ -231,7 +225,6 @@ Reproducibility: Code and training scripts will be released on GitHub to ensure 
 ### 免責事項
 > * 研究・教育用。シンプルさと高速な動作を実現するため、入力チェックは最低限の実装となっています。
 > * Designed for research and education. Minimal input validation is performed for simplicity and performance.
-> * ※ 本プロジェクトは個人開発ポートフォリオとして実装したものである。
-> * ※ 本プロジェクトでは講座の最終課題で使用されたデータセットを実験用に流用しているが、コミュニティ規約によりデータセット自体は公開対象としない。そのため完全な再現は難しい可能性があるが、実験設定・モデル構成・学習条件については本レポート内で可能な限り詳細に記述した。
+> * ※ 本プロジェクトは個人開発ポートフォリオとして実装したものです。
 > * ※ 本プロジェクトでは、13クラスのインデックスを特定環境の独自の順序を仮定し（0: bed, ..., 11: wall 等）定義している。標準的な NYUv2 13-class順序と異なる場合があるため注意が必要である。
 > * NYUv2 ラベル（1〜894）を評価に使用する際は、学習時のインデックスと同期させる必要がある。
