@@ -40,7 +40,6 @@
 1. **Late Fusion Architecture:** `CLIP-ViT-Base` によるグローバルな特徴解析・広範囲の意味抽出と、`U-Net` (ResNet backbone) による深度画像からのエッジ（幾何学的）復元を統合。
 2. **M1/MPS Optimized:** Apple Silicon の Unified Memory を最大限活用し、メモリ効率を考慮した設計（中間層128チャネル）。
 3. **Hybrid Loss:** クラス不均衡に頑健に対応するため、Focal Loss + Dice Loss のハイブリッド関数を実装。
-4. **Modular Design:** `SegSetup` および `PrepareDatasets` クラスによる、疎結合でメンテナンス性の高いコードベース。
 
 ## Dataset
 
