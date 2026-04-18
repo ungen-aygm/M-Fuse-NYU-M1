@@ -141,9 +141,6 @@ deactivate
 | Late Fusion / Decoder | Base LR × 1.0 | 統合層の標準的な学習 |
 
 ## <a id="reproduce"></a>Quick Start & Reproducibility
-
-	データセットが所定のディレクトリ(datasets/nyuv2/)以下に正しく配置されていることを確認してください。
-    以下のコマンドでは、前処理を実行してから学習を開始します。  
   
 ### 前処理の実行
 データセットの準備から学習まで、以下の手順で実行可能です。
