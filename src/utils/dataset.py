@@ -58,18 +58,16 @@ class NYUv2Dataset(VisionDataset):
 		# PIL変換
 		image_PIL = Image.fromarray(image).resize(self.config.TARGET_SIZE, Image.BILINEAR)
 		depth_PIL = Image.fromarray(depth).resize(self.config.TARGET_SIZE, Image.NEAREST)
-		mask_PIL = None
-		if mask is not None:
-			mask_PIL = Image.fromarray(mask).resize(self.config.TARGET_SIZE, Image.NEAREST)
+		mask_PIL = Image.fromarray(mask).resize(self.config.TARGET_SIZE, Image.NEAREST) if mask is not None else None
 
+		# Augmentation(Train)
 		if self.is_aug and self.augmentation:
 			image_PIL, depth_PIL, mask_PIL = self.augmentation(image_PIL, depth_PIL, mask_PIL)
 		
 		image = self.transform(image_PIL)
 		depth = self.depth_transform(depth_PIL)
-		# 評価モード
+		# Mask
 		if mask_PIL is not None:
-			mask_PIL = mask_PIL
 			mask = torch.from_numpy(np.array(mask_PIL)).long()
 		else:
 			mask = torch.zeros(self.config.TARGET_SIZE, dtype=torch.long)
