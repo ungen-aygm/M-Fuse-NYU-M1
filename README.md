@@ -219,5 +219,5 @@ Reproducibility: Code and training scripts will be released on GitHub to ensure 
 > * 研究・教育用。シンプルさと高速な動作を実現するため、入力チェックは最低限の実装となっています。
 > * Designed for research and education. Minimal input validation is performed for simplicity and performance.
 > * ※ 本プロジェクトは個人開発ポートフォリオとして実装したものです。
-> * ※ 本プロジェクトでは、13クラスのインデックスを特定環境の独自の順序を仮定し（0: bed, ..., 11: wall 等）定義している。標準的な NYUv2 13-class順序と異なる場合があるため注意が必要である。
+> * ※ 本プロジェクトでは、13クラスのインデックスを本プロジェクト独自で順序を仮定し（0: bed, ..., 11: wall 等）定義している。標準的な NYUv2 13-class順序と異なる場合があるため注意が必要である。
 > * NYUv2 ラベル（1〜894）を評価に使用する際は、学習時のインデックスと同期させる必要がある。
