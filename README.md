@@ -11,8 +11,7 @@
 >
 > Dataset Notice
 >
-> This project was developed for a personal portfolio using a dataset provided through a private study program.
-> To reproduce the experiments, please use publicly available RGB-D datasets such as NYUv2.
+> A personal portfolio project based on the NYU Depth Dataset V2.
 
 ## Project Overview
 
